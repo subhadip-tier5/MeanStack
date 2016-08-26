@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="contactApp">
+    <head>
+        <title>Contact List app using mean stack application</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+        <div class="container" ng-controller="AppCltr">
+            <h2>Contact List App</h2>
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Number</th>
+                        <th>Action</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" ng-model="contact.name" class="form-control"/></td>
+                        <td><input type="text" ng-model="contact.email" class="form-control"/></td>
+                        <td><input type="text" ng-model="contact.number" class="form-control"/></td>
+                        <td><button ng-click="addContact()" class="btn btn-primary">Add Contact</button></td>
+                        <td><button ng-click="updateContact()" class="btn btn-info">Update Contact</button></td>
+                    </tr>
+                    <tr ng-repeat="contact in contactList">
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td>{{ contact.number }}</td>
+                        <td><button class="btn btn-warning" ng-click="modify(contact._id)">Edit</button></td>
+                        <td><button class="btn btn-danger" ng-click="remove(contact._id)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src="assets/js/app.js"></script>
+    </body>
+</html>
