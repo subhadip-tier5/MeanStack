@@ -1,8 +1,6 @@
 <div ng-controller="AppCltr">
-    <div class="row">
-        <div class="col-md-8"></div>
-        <div class="col-md-1"><label class="control-label">Search: </label></div>
-        <div class="col-md-3"><input type="text" class="form-control" ng-model="searchContact"/></div>
+    <div class="row pull-right">
+        <input type="text" class="form-control" ng-model="searchContact" placeholder="Search here..."/>
     </div>
     <div class="row">
         <table class="table table-responsive">
@@ -32,9 +30,8 @@
                 </tr>
             </tbody>
         </table>
-        <div class="row">
-            <div class="col-md-6"></div>
-            <div class="col-md-6"><dir-pagination-controls max-size="10" direction-links="true" boundary-links="true" ></dir-pagination-controls></div>
+        <div class="row pull-right">
+            <dir-pagination-controls max-size="10" direction-links="true" boundary-links="true" ></dir-pagination-controls>
         </div>
     </div>
 </div>
