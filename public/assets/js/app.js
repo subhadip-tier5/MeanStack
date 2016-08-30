@@ -1,7 +1,17 @@
-var contactApp = angular.module('contactApp', ['angularUtils.directives.dirPagination']);
-contactApp.controller('AppCltr', function($scope, $http){
-    $scope.currentPage = 0;
-    
+var app = angular.module('contactApp', ['ngRoute', 'angularUtils.directives.dirPagination']);
+
+app.config(function($routeProvider){
+    $routeProvider.when('/', {templateUrl: '/views/contact.html'});
+    $routeProvider.when('/blog', {templateUrl: '/views/blog.html'});
+});
+
+app.controller('NavCltr', function($scope, $location){
+    $scope.getClass = function (path) {
+        return ($location.path() === path) ? 'active' : '';
+    };
+});
+
+app.controller('AppCltr', function($scope, $http){
     var refresh = function(){
         $http.get('/contactList').success(function(response){
             console.log('Client get a response');

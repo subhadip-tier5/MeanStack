@@ -1,0 +1,40 @@
+<div ng-controller="AppCltr">
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-1"><label class="control-label">Search: </label></div>
+        <div class="col-md-3"><input type="text" class="form-control" ng-model="searchContact"/></div>
+    </div>
+    <div class="row">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Number</th>
+                    <th>Action</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" ng-model="contact.name" class="form-control"/></td>
+                    <td><input type="text" ng-model="contact.email" class="form-control"/></td>
+                    <td><input type="text" ng-model="contact.number" class="form-control"/></td>
+                    <td><button ng-click="addContact()" class="btn btn-primary">Add Contact</button></td>
+                    <td><button ng-click="updateContact()" class="btn btn-info">Update Contact</button></td>
+                </tr>
+                <tr dir-paginate="contact in contactList|filter:searchContact|itemsPerPage:10">
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.number }}</td>
+                    <td><button class="btn btn-warning" ng-click="modify(contact._id)">Edit</button></td>
+                    <td><button class="btn btn-danger" ng-click="remove(contact._id)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6"><dir-pagination-controls max-size="10" direction-links="true" boundary-links="true" ></dir-pagination-controls></div>
+        </div>
+    </div>
+</div>
