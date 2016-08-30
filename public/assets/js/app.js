@@ -1,12 +1,14 @@
-var contactApp = angular.module('contactApp', []);
+var contactApp = angular.module('contactApp', ['angularUtils.directives.dirPagination']);
 contactApp.controller('AppCltr', function($scope, $http){
+    $scope.currentPage = 0;
+    
     var refresh = function(){
         $http.get('/contactList').success(function(response){
             console.log('Client get a response');
             $scope.contactList = response;
             $scope.contact = "";
         });
-    }
+    };
     
     refresh();
     
@@ -16,7 +18,7 @@ contactApp.controller('AppCltr', function($scope, $http){
             console.log(response);
             refresh();
         });
-    }
+    };
     
     $scope.remove = function(id){
         console.log(id);
@@ -24,7 +26,7 @@ contactApp.controller('AppCltr', function($scope, $http){
             console.log(response);
             refresh();
         });
-    }
+    };
     
     $scope.modify = function(id){
         console.log(id);
@@ -32,7 +34,7 @@ contactApp.controller('AppCltr', function($scope, $http){
             console.log(response);
             $scope.contact = response;
         });
-    }
+    };
     
     $scope.updateContact = function(){
         console.log($scope.contact._id);
@@ -40,5 +42,5 @@ contactApp.controller('AppCltr', function($scope, $http){
             console.log(response);
             refresh();
         });
-    }
+    };
 });

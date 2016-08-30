@@ -1,31 +1,29 @@
 var express = require('express');
-var app = express();
+var router = express.Router();
 var mongojs = require('mongojs');
 var db = mongojs('contactList', ['contactList']);
 var bodyParser = require('body-parser');
-//var router = require('./server/routes/router');
-
-app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json());
-//app.use(router);
-app.get('/contactList', function(req, res){
+express().use(bodyParser.json());
+router.get('/contactList', function(req, res, next){
     console.log('server js received a get request');
-    
+
     db.contactList.find(function(err, docs){
         console.log(docs);
         res.json(docs);
     });
 });
 
-app.post('/contactList', function(req, res){
+router.post('/contactList', function(req, res){
     console.log(req.body);
-    delete req.body._id;
-    db.contactList.insert(req.body, function(err, docs){
-        res.json(docs);
-    });
+    if(typeof req.body != 'undefined'){
+        delete req.body._id;
+        db.contactList.insert(req.body, function(err, docs){
+            res.json(docs);
+        });
+    }
 });
 
-app.delete('/contactList/:id', function(req, res){
+router.delete('/contactList/:id', function(req, res){
     var id = req.params.id;
     console.log(id);
     db.contactList.remove({_id: mongojs.ObjectID(id)}, function(err, docs){
@@ -33,7 +31,7 @@ app.delete('/contactList/:id', function(req, res){
     });
 });
 
-app.get('/contactList/:id', function(req, res){
+router.get('/contactList/:id', function(req, res){
     var id = req.params.id;
     console.log(id);
     db.contactList.findOne({_id: mongojs.ObjectID(id)}, function(err, docs){
@@ -41,7 +39,7 @@ app.get('/contactList/:id', function(req, res){
     });
 });
 
-app.put('/contactList/:id', function(req, res){
+router.put('/contactList/:id', function(req, res){
     var id = req.params.id;
     console.log(req.body.name);
     db.contactList.findAndModify({
@@ -54,5 +52,4 @@ app.put('/contactList/:id', function(req, res){
     });
 });
 
-app.listen(3000);
-console.log('Server is running on port 3000');
+module.exports = router;
