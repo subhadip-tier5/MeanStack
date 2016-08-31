@@ -54,5 +54,18 @@ app.put('/contactList/:id', function(req, res){
     });
 });
 
+app.get('/blog', function(req, res){
+    db.blog.find(function(err, docs){
+        res.json(docs);
+    });
+});
+
+app.get('/blog/:slug', function(req, res){
+    var slug = req.params.slug;
+    db.blog.findOne({slug: slug},function(err, docs){
+        res.json(docs);
+    });
+});
+
 app.listen(3000);
 console.log('Server is running on port 3000');

@@ -1,2 +1,6 @@
-<h2>Blog</h2>
-<p>Blog is coming soon</p>
+<div ng-controller="BlogCltr">
+    <div class="row" ng-repeat="blog in blogs">
+        <h2><a href="#blog/{{ blog.slug }}" title="{{ blog.title }}">{{ blog.title }}</a></h2>
+        <p>{{ blog.content }}</p>
+    </div>
+</div>
